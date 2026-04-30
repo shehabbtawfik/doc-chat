@@ -201,4 +201,4 @@ doc-chat/
 
 ## License
 
-MIT License — Copyright 2025 Shehab Tawfik
+MIT License — Copyright 2026 Shehab Tawfik
