@@ -16,7 +16,7 @@ DocuMind is a full-stack RAG (Retrieval Augmented Generation) application: drop 
 ## How it works
 
 ```
-PDF upload → text extraction → chunking → OpenAI embeddings → Chroma vector store
+PDF upload → text extraction → chunking → embeddings (local or cloud) → Chroma vector store
                                                                         ↓
 User question → embed question → cosine similarity search → top-5 chunks
                                                                         ↓
@@ -36,8 +36,8 @@ User question → embed question → cosine similarity search → top-5 chunks
 |---|---|
 | Frontend | Next.js 14, TypeScript, Tailwind CSS |
 | Backend | FastAPI, Python 3.11 |
-| Embeddings | OpenAI `text-embedding-3-small` |
-| LLM | OpenAI `gpt-4o-mini` |
+| Embeddings | Ollama `nomic-embed-text` (local) or OpenAI `text-embedding-3-small` |
+| LLM | Any Ollama model (local, no API key) or OpenAI `gpt-4o-mini` |
 | Vector store | ChromaDB (persistent, cosine similarity) |
 | PDF parsing | pypdf + LangChain text splitter |
 | Streaming | Server-Sent Events (SSE) |
@@ -70,7 +70,13 @@ You can still plug in OpenAI or Azure if you want cloud quality — the provider
 ### Prerequisites
 - Python 3.11+
 - Node.js 18+
-- An [OpenAI API key](https://platform.openai.com/api-keys)
+- [Ollama](https://ollama.ai) running locally — **no API key needed**
+  ```bash
+  ollama pull nomic-embed-text   # embeddings
+  ollama pull qwen2.5:14b        # chat (or any model you prefer)
+  ```
+  > Using OpenAI instead? Add `OPENAI_API_KEY=sk-...` to `.env` and set
+  > `EMBEDDING_MODEL=text-embedding-3-small` and `CHAT_MODEL=gpt-4o-mini`.
 
 ### 1. Backend
 
@@ -80,7 +86,7 @@ python -m venv venv && source venv/bin/activate
 pip install -r requirements.txt
 
 cp .env.example .env
-# Edit .env and add your OPENAI_API_KEY
+# Ollama is used by default (no API key needed). Optionally add OPENAI_API_KEY to switch providers.
 
 uvicorn app.main:app --reload
 # API running at http://localhost:8000
@@ -100,7 +106,7 @@ npm run dev
 
 ```bash
 cp backend/.env.example backend/.env
-# Add your OPENAI_API_KEY to backend/.env
+# Ollama is used by default. Optionally add OPENAI_API_KEY to backend/.env to use OpenAI instead.
 
 docker-compose up -d
 # App at http://localhost:3000
@@ -155,7 +161,7 @@ doc-chat/
 │   │   └── services/
 │   │       ├── pdf_parser.py    # Text extraction + chunking
 │   │       ├── vector_store.py  # Chroma operations (embed, search, delete)
-│   │       └── llm.py           # OpenAI streaming chat
+│   │       └── llm.py           # Streaming chat (Ollama or OpenAI)
 │   ├── requirements.txt
 │   └── Dockerfile
 ├── frontend/
@@ -181,7 +187,7 @@ doc-chat/
 
 1. Create a new project on [Railway](https://railway.app)
 2. Connect this repo, set the root to `backend/`
-3. Add environment variable: `OPENAI_API_KEY=sk-...`
+3. Add environment variable: `OLLAMA_BASE_URL=http://your-ollama-host:11434` (or `OPENAI_API_KEY` if using OpenAI)
 4. Railway auto-detects the Dockerfile and deploys
 
 ### Frontend → Vercel
