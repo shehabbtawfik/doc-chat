@@ -48,6 +48,14 @@ export default function Home() {
         </div>
         <span className="font-bold text-slate-800 tracking-tight">DocuMind</span>
         <span className="text-slate-400 text-sm ml-1">— chat with your documents</span>
+        <a
+          href="http://localhost:8000/visualize"
+          target="_blank"
+          rel="noreferrer"
+          className="ml-auto text-xs px-3 py-1.5 rounded-lg border border-brand-500 text-brand-500 hover:bg-brand-500 hover:text-white transition-colors font-medium"
+        >
+          ✦ Vector Space
+        </a>
       </header>
 
       {/* Main layout */}

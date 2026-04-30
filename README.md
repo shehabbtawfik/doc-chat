@@ -45,6 +45,26 @@ User question → embed question → cosine similarity search → top-5 chunks
 
 ---
 
+## Privacy & Security
+
+> **Your documents never leave your network.**
+
+DocuMind is designed for environments where data confidentiality matters. When configured with a local Ollama instance:
+
+| Stage | What happens | Where it runs |
+|---|---|---|
+| PDF parsing | Text extracted from your file | Local process |
+| Embedding | Text chunks converted to vectors | Local Ollama () |
+| Vector storage | Embeddings stored in Chroma | Local disk |
+| LLM inference | Answer generated from context | Local Ollama ( / any model) |
+| **External calls** | **None** | — |
+
+This is the opposite of sending documents to OpenAI, Azure, or any cloud API. The network never sees your content. Useful for legal documents, internal reports, healthcare data, or any situation where cloud LLM data processing is restricted.
+
+You can still plug in OpenAI or Azure if you want cloud quality — the provider abstraction makes it a one-line config change.
+
+---
+
 ## Quick start
 
 ### Prerequisites
