@@ -11,9 +11,6 @@ router = APIRouter(prefix="/api/chat", tags=["chat"])
 
 @router.post("")
 async def chat(request: ChatRequest):
-    if not settings.openai_api_key:
-        raise HTTPException(503, "OPENAI_API_KEY is not configured on the server.")
-
     question = request.question.strip()
     if not question:
         raise HTTPException(400, "Question cannot be empty.")

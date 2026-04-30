@@ -2,7 +2,7 @@
 
 import { ChevronDown, ChevronUp, Quote } from "lucide-react";
 import { useState } from "react";
-import type { Source } from "@/lib/types";
+import type { Source } from "../lib/types";
 
 interface Props {
   sources: Source[];

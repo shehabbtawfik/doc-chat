@@ -10,7 +10,7 @@ _collection = _client.get_or_create_collection(
     metadata={"hnsw:space": "cosine"},
 )
 
-_openai = OpenAI(api_key=settings.openai_api_key)
+_openai = OpenAI(base_url=settings.api_base_url, api_key=settings.api_key)
 
 
 def _embed(texts: list[str]) -> list[list[float]]:
@@ -23,8 +23,7 @@ def _embed(texts: list[str]) -> list[list[float]]:
 
 def add_document(doc_id: str, title: str, chunks: list[str]) -> int:
     """Embed and store all chunks for a document."""
-    # Embed in batches of 100 (OpenAI limit is 2048 but keep it reasonable)
-    batch_size = 100
+    batch_size = 20  # smaller batches for Ollama
     all_embeddings = []
     for i in range(0, len(chunks), batch_size):
         batch = chunks[i : i + batch_size]
@@ -51,10 +50,13 @@ def search(query: str, k: int = 5, doc_ids: list[str] | None = None) -> list[dic
     query_embedding = _embed([query])[0]
 
     where = {"doc_id": {"$in": doc_ids}} if doc_ids else None
+    total = _collection.count()
+    if total == 0:
+        return []
 
     results = _collection.query(
         query_embeddings=[query_embedding],
-        n_results=min(k, _collection.count() or 1),
+        n_results=min(k, total),
         where=where,
         include=["documents", "metadatas", "distances"],
     )
@@ -77,7 +79,6 @@ def search(query: str, k: int = 5, doc_ids: list[str] | None = None) -> list[dic
 
 
 def list_documents() -> list[dict]:
-    """Return one entry per unique document."""
     all_results = _collection.get(include=["metadatas"])
     docs: dict[str, dict] = {}
     for meta in all_results["metadatas"]:
@@ -94,7 +95,6 @@ def list_documents() -> list[dict]:
 
 
 def delete_document(doc_id: str) -> int:
-    """Delete all chunks for a document. Returns number of chunks deleted."""
     results = _collection.get(where={"doc_id": doc_id})
     if not results["ids"]:
         return 0

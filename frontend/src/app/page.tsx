@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import DocumentSidebar from "@/components/DocumentSidebar";
-import ChatInterface from "@/components/ChatInterface";
-import type { Document } from "@/lib/types";
-import { fetchDocuments } from "@/lib/api";
+import DocumentSidebar from "../components/DocumentSidebar";
+import ChatInterface from "../components/ChatInterface";
+import type { Document } from "../lib/types";
+import { fetchDocuments } from "../lib/api";
 import { Sparkles } from "lucide-react";
 
 export default function Home() {

@@ -2,8 +2,8 @@
 
 import { useRef, useState } from "react";
 import { FileText, Trash2, Upload, Loader2, BookOpen } from "lucide-react";
-import type { Document } from "@/lib/types";
-import { uploadDocument, deleteDocument } from "@/lib/api";
+import type { Document } from "../lib/types";
+import { uploadDocument, deleteDocument } from "../lib/api";
 
 interface Props {
   documents: Document[];

@@ -2,8 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Send, Bot, User, AlertCircle } from "lucide-react";
-import type { Message, Source } from "@/lib/types";
-import { streamChat } from "@/lib/api";
+import type { Message, Source } from "../lib/types";
+import { streamChat } from "../lib/api";
 import SourcePanel from "./SourcePanel";
 
 interface Props {

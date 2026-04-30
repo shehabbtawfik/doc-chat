@@ -1,0 +1,28 @@
+0 verbose cli /usr/local/bin/node /usr/local/lib/node_modules/npm/bin/npm-cli.js
+1 info using npm@11.5.2
+2 info using node@v22.13.0
+3 silly config load:file:/usr/local/lib/node_modules/npm/npmrc
+4 silly config load:file:/private/tmp/doc-chat/frontend/.npmrc
+5 silly config load:file:/Users/shehabtawfik/.npmrc
+6 silly config load:file:/Users/shehabtawfik/.npm-global/etc/npmrc
+7 verbose title npm exec tailwindcss -i src/app/globals.css -o /tmp/test-out.css
+8 verbose argv "exec" "--" "tailwindcss" "-i" "src/app/globals.css" "-o" "/tmp/test-out.css"
+9 verbose logfile logs-max:10 dir:/private/tmp/doc-chat/frontend/.npm-cache/_logs/2026-04-30T16_06_33_810Z-
+10 verbose logfile /private/tmp/doc-chat/frontend/.npm-cache/_logs/2026-04-30T16_06_33_810Z-debug-0.log
+11 silly logfile done cleaning log files
+12 silly packumentCache heap:4345298944 maxSize:1086324736 maxEntrySize:543162368
+13 http fetch GET 200 https://registry.npmjs.org/tailwindcss 1013ms (cache miss)
+14 verbose stack Error: could not determine executable to run
+14 verbose stack     at getBinFromManifest (/usr/local/lib/node_modules/npm/node_modules/libnpmexec/lib/get-bin-from-manifest.js:17:23)
+14 verbose stack     at exec (/usr/local/lib/node_modules/npm/node_modules/libnpmexec/lib/index.js:205:15)
+14 verbose stack     at async Npm.exec (/usr/local/lib/node_modules/npm/lib/npm.js:208:9)
+14 verbose stack     at async module.exports (/usr/local/lib/node_modules/npm/lib/cli/entry.js:67:5)
+15 verbose pkgid tailwindcss@4.2.4
+16 error could not determine executable to run
+17 verbose cwd /private/tmp/doc-chat/frontend
+18 verbose os Darwin 25.3.0
+19 verbose node v22.13.0
+20 verbose npm  v11.5.2
+21 verbose exit 1
+22 verbose code 1
+23 error A complete log of this run can be found in: /private/tmp/doc-chat/frontend/.npm-cache/_logs/2026-04-30T16_06_33_810Z-debug-0.log

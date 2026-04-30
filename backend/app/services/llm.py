@@ -3,7 +3,7 @@ from openai import OpenAI
 from app.config import settings
 from typing import Generator
 
-_openai = OpenAI(api_key=settings.openai_api_key)
+_openai = OpenAI(base_url=settings.api_base_url, api_key=settings.api_key)
 
 SYSTEM_PROMPT = """You are a helpful assistant that answers questions strictly based on the provided document context.
 
@@ -22,7 +22,6 @@ def _build_context(sources: list[dict]) -> str:
 
 
 def chat_stream(question: str, sources: list[dict]) -> Generator[str, None, None]:
-    """Yield tokens from the LLM response."""
     context = _build_context(sources)
     messages = [
         {"role": "system", "content": SYSTEM_PROMPT},

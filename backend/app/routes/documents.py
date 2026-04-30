@@ -18,9 +18,6 @@ CONTENT_TYPE_MAP = {
 
 @router.post("/upload", response_model=UploadResponse)
 async def upload_document(file: UploadFile = File(...)):
-    if not settings.openai_api_key:
-        raise HTTPException(503, "OPENAI_API_KEY is not configured on the server.")
-
     content_type = file.content_type or ""
     extractor = CONTENT_TYPE_MAP.get(content_type)
 
