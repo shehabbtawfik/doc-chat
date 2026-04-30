@@ -1,3 +1,4 @@
+from __future__ import annotations
 import pypdf
 import io
 from langchain.text_splitter import RecursiveCharacterTextSplitter

@@ -1,3 +1,4 @@
+from __future__ import annotations
 from openai import OpenAI
 from app.config import settings
 from typing import Generator

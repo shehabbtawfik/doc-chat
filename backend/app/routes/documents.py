@@ -1,3 +1,4 @@
+from __future__ import annotations
 import uuid
 from fastapi import APIRouter, UploadFile, File, HTTPException
 from app.services import pdf_parser, vector_store

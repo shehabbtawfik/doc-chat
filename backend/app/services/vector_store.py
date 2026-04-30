@@ -1,3 +1,4 @@
+from __future__ import annotations
 import chromadb
 from openai import OpenAI
 from app.config import settings
