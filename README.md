@@ -9,7 +9,7 @@ DocuMind is a full-stack RAG (Retrieval Augmented Generation) application: drop 
 [![Next.js](https://img.shields.io/badge/Next.js-14-black)](https://nextjs.org)
 [![License](https://img.shields.io/badge/License-MIT-green)](./LICENSE)
 
-![DocuMind Demo](./demo.gif)
+![DocuMind Demo](./documind_preview.gif)
 
 ---
 
